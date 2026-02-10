@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Be My Valentine 💘</title>
+
+<!-- EmailJS SDK -->
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+
+<style>
+  * { box-sizing: border-box; margin:0; padding:0; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: #ffe6eb;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .container {
+    background: #fff;
+    padding: 25px;
+    border-radius: 16px;
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  }
+
+  h1 {
+    color: #c2185b;
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+  }
+
+  img {
+    max-width: 150px;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .button-zone {
+    position: relative;
+    height: 140px;
+    margin-bottom: 20px;
+  }
+
+  button {
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  #yes {
+    background: #4CAF50;
+    color: white;
+  }
+
+  #no {
+    background: #f44336;
+    color: white;
+  }
+
+</style>
+</head>
+<body>
+
+<div class="container">
+  <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNGF6NHVnNjZyaXphcGdzdmhuMG1jc3J2YmZmcTFpMzF1aDlkcWozZyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/R26ERFVcOuANi3EWfT/giphy.gif" alt="adorable cartoon heart">
+
+  <h1>Will you be my Valentine? 💖</h1>
+
+  <div class="button-zone">
+    <button id="yes">Yes 💕</button>
+    <button id="no">No 😭</button>
+  </div>
+</div>
+
+<script>
+  // Initialisation EmailJS avec ta Public Key
+  emailjs.init("tjjfHleLGgywlQ6Oq");
+
+  const yesBtn = document.getElementById("yes");
+  const noBtn = document.getElementById("no");
+
+  // Fonction pour envoyer le choix
+  function sendChoice(choice){
+    emailjs.send("service_xxx", "template_yyy", { choice: choice }, "tjjfHleLGgywlQ6Oq")
+      .then(()=> console.log("Email envoyé:", choice))
+      .catch(err=> console.error(err));
+  }
+
+  // Bouton Oui
+  yesBtn.addEventListener("click", ()=>{
+    sendChoice("Oui");
+    window.location.href = "oui.html";
+  });
+
+  // Bouton Non
+  let clickCount = 0;
+  const maxClicks = 9;
+  const shrinkFactor = 0.85;
+
+  noBtn.addEventListener("click", ()=>{
+    clickCount++;
+
+    const currentWidth = noBtn.offsetWidth;
+    const currentHeight = noBtn.offsetHeight;
+    const currentFont = parseFloat(window.getComputedStyle(noBtn).fontSize);
+
+    noBtn.style.width = currentWidth * shrinkFactor + "px";
+    noBtn.style.height = currentHeight * shrinkFactor + "px";
+    noBtn.style.fontSize = currentFont * shrinkFactor + "px";
+
+    if(clickCount >= maxClicks){
+      sendChoice("Non");
+      window.location.href = "non.html";
+    }
+  });
+</script>
+
+</body>
+</html>
