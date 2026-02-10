@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oui 💕</title>
+<style>
+  * { box-sizing: border-box; margin:0; padding:0; }
+
+  body {
+    font-family: Arial, sans-serif;
+    background: #fff0f5;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* on cache le scroll de la page */
+  }
+
+  h1 {
+    color: #c2185b;
+    font-size: 2.5rem;
+    text-align: center;
+    padding: 20px 0;
+    flex-shrink: 0;
+  }
+
+  .credits-wrapper {
+    flex: 1;
+    position: relative;
+    overflow-y: auto; /* permet scroll manuel */
+    padding: 0 20px;
+  }
+
+  .credits {
+    text-align: center;
+    color: #c2185b;
+    font-size: 1.2rem;
+    line-height: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  img.gif {
+    max-width: 80px;
+    width: 20%;
+    margin: 10px 0;
+    border-radius: 12px;
+  }
+
+  @media(max-width:500px){
+    h1 { font-size:2rem; }
+    .credits { font-size:1rem; }
+    img.gif { max-width:60px; }
+  }
+</style>
+</head>
+<body>
+
+<h1>💖 Merci ! 💖</h1>
+
+<div class="credits-wrapper">
+  <div class="credits">
+    <!-- Texte long pour faire un vrai générique -->
+    <p>Pour avoir dit "Oui 💕"</p>
+    <img class="gif" src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif" alt="coeur animé">
+    <p>Que cette journée soit remplie de bonheur et de sourires</p>
+    <p>Chaque instant que nous partageons est précieux ✨</p>
+    <p>Les petits gestes valent beaucoup plus que les mots 💌</p>
+    <img class="gif" src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" alt="coeur adorable">
+    <p>Gardons le sourire dans nos cœurs 🌸</p>
+    <p>Les souvenirs d'aujourd'hui resteront gravés pour toujours 💖</p>
+    <p>Merci d'être spécial(e) pour moi 💕</p>
+    <p>Chaque clic mène à un petit miracle ✨</p>
+    <img class="gif" src="https://media.giphy.com/media/xT9IgG50Fb7Mi0prBC/giphy.gif" alt="amour gif">
+    <p>Les moments de joie doivent être célébrés 🎉</p>
+    <p>On garde la tendresse et l’affection dans chaque pensée ❤️</p>
+    <img class="gif" src="https://media.giphy.com/media/26BRzozg4TCBXv6QU/giphy.gif" alt="gif coeur mignon">
+    <p>Félicitations pour avoir accepté d'être mon Valentine ! 💕</p>
+    <p>La vie est plus douce avec quelqu'un comme toi ✨</p>
+    <p>Que ce moment reste à jamais dans nos cœurs 🌹</p>
+    <p>Fin du générique… mais le souvenir reste 💖</p>
+  </div>
+</div>
+
+<script>
+const wrapper = document.querySelector('.credits-wrapper');
+const credits = document.querySelector('.credits');
+let speed = 0.2; // vitesse très lente pour une lecture confortable
+
+function autoScroll() {
+  // défilement automatique fluide
+  wrapper.scrollTop += speed;
+
+  // arrêter quand le générique atteint la fin
+  if(wrapper.scrollTop + wrapper.clientHeight >= credits.scrollHeight){
+    wrapper.scrollTop = credits.scrollHeight - wrapper.clientHeight;
+    return; // stoppe l'animation à la fin
+  }
+
+  requestAnimationFrame(autoScroll);
+}
+
+autoScroll();
+
+// Interaction : l'utilisateur peut faire remonter ou ralentir
+let isDragging = false;
+let startY, scrollTopStart;
+
+wrapper.addEventListener('mousedown', (e)=>{
+  isDragging = true;
+  startY = e.pageY;
+  scrollTopStart = wrapper.scrollTop;
+});
+wrapper.addEventListener('mousemove', (e)=>{
+  if(isDragging){
+    wrapper.scrollTop = scrollTopStart - (e.pageY - startY);
+  }
+});
+wrapper.addEventListener('mouseup', ()=>{ isDragging = false; });
+wrapper.addEventListener('mouseleave', ()=>{ isDragging = false; });
+
+// Mobile
+wrapper.addEventListener('touchstart', (e)=>{
+  isDragging = true;
+  startY = e.touches[0].pageY;
+  scrollTopStart = wrapper.scrollTop;
+});
+wrapper.addEventListener('touchmove', (e)=>{
+  if(isDragging){
+    wrapper.scrollTop = scrollTopStart - (e.touches[0].pageY - startY);
+  }
+});
+wrapper.addEventListener('touchend', ()=>{ isDragging = false; });
+
+</script>
+
+</body>
+</html>
